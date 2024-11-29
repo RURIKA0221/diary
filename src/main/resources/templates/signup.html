@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>新規登録</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/todo.css}">
+</head>
+<body>
+	<div class="form_back sd">
+		<div class="form sd">
+			<p class="title sd test">Sign up</p>
+			<div class="form_box sd">
+				<div th:if="${passwordError}">
+					<div>パスワードが異なります。</div>
+				</div>
+				<form method="post" th:action="@{/signup}" style="width: 400px">
+					<div class="form_box_inner">
+						<p class="text sd">ユーザーID</p>
+						<input class="item" type="text" id="userName" name="userName">
+					</div>
+					<div class="form_box_inner">
+						<p class="text sd">表示名</p>
+						<input class="item" type="text" id="display_name"
+							name="display_name">
+					</div>
+					<div class="form_box_inner">
+						<p class="text sd">誕生日</p>
+						<input class="item" type="date" id="birthday" name="birthday">
+					</div>
+					<div class="form_box_inner">
+						<p class="text sd">パスワード</p>
+						<input class="item sd" type="password" id="password"
+							name="password">
+					</div>
+					<div class="form_box_inner">
+						<p class="text sd">パスワード(確認用)</p>
+						<input class="item sd" type="password" id="password2"
+							name="password2">
+					</div>
+
+					<button class="form_button sd">
+						<p class="form_button_text sd">新規登録へ</p>
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
