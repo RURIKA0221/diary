@@ -1,9 +1,6 @@
 package com.diary.service;
 
-import java.util.Collection;
-
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.diary.data.entity.Users;
@@ -13,12 +10,6 @@ public class AccountUserDetails implements UserDetails{
 
 	public AccountUserDetails(Users user) {
 		this.user = user;
-	}
-
-	// ユーザに与えられている権限リストを返却する
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return AuthorityUtils.createAuthorityList("ROLE_" + user.getRoleName());
 	}
 
 	// パスワードを返却する
@@ -66,4 +57,11 @@ public class AccountUserDetails implements UserDetails{
 	public String getName() {
 		return user.getName();
 	}
+
+	@Override
+	public java.util.Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
 }

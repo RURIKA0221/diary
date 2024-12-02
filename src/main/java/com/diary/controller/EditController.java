@@ -2,6 +2,7 @@ package com.diary.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,7 @@ import com.diary.data.entity.Diary;
 import com.diary.data.repository.DiaryRepository;
 import com.diary.form.DiaryForm;
 import com.diary.service.AccountUserDetails;
-
+@Controller
 public class EditController {
 	@Autowired
 	private DiaryRepository diary;

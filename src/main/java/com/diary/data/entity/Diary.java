@@ -18,5 +18,4 @@ public class Diary {
 	private String name;
 	private String text;
 	private LocalDate date;
-	private boolean done;
 }

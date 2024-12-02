@@ -19,21 +19,23 @@
 					style="width: 400px">
 					<div class="form_box_inner">
 						<p class="text sd">ユーザーID</p>
-						<input class="item" type="text" id="userName" name="userName">
+						<input class="item" type="text" id="username" name="username">
 					</div>
 					<div class="form_box_inner">
 						<p class="text sd">パスワード</p>
 						<input class="item sd" type="password" id="password"
 							name="password">
 					</div>
+					<div class="button_group">
 					<button class="form_button sd">
 						<p class="form_button_text sd">サインイン</p>
-					</button>
-					<button class="form_button sd"
+					</button>	
+				</form>
+				<button class="form_button sd" type="button"
 						th:onclick="|location.href='@{/signup}'|">
 						<p class="form_button_text sd">新規登録</p>
 					</button>
-				</form>
+					</div>
 			</div>
 		</div>
 	</div>

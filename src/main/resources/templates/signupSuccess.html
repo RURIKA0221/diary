@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>新規登録完了</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/todo.css}">
+</head>
+<body>
+	<div class="form_back sd">
+		<div class="form sd">
+			<p class="title sd test">Success</p>
+			<div class="form_box sd">
+				<div>
+					<p>新規登録ができました。</p>
+					<p>ログイン画面に戻ります。</p>
+				</div>
+				<button class="form_button sd"
+						th:onclick="|location.href='@{/login}'|">
+						<p class="form_button_text sd">ログイン画面へ</p>
+					</button>
+				
+			</div>
+		</div>
+	</div>
+</body>
+</html>

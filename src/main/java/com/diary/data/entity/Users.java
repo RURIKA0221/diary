@@ -13,9 +13,7 @@ import lombok.ToString;
 public class Users {
 	@Id
 	public String userName;
-	public String password;
 	public String name;
-	public String roleName;
-	public String display_name;
 	public LocalDate birthday;
+	public String password;
 }

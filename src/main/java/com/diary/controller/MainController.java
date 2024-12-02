@@ -8,8 +8,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -19,6 +19,7 @@ import com.diary.data.entity.Diary;
 import com.diary.data.repository.DiaryRepository;
 import com.diary.service.AccountUserDetails;
 
+@Controller
 public class MainController {
 
 	@Autowired
@@ -44,15 +45,16 @@ public class MainController {
 		LocalDate firstDayOfMonth = targetDate.withDayOfMonth(1);
 
 		LocalDate current;
-		
+
 		// 曜日を表すDayOfWeekを取得
 		DayOfWeek firstDayOfWeek = targetDate.getDayOfWeek();
-		//もしfirstDayOfWeekが日曜日なら前月分はなし
-		if(firstDayOfWeek ==DayOfWeek.SUNDAY) {
+		// もしfirstDayOfWeekが日曜日なら前月分はなし
+		if (firstDayOfWeek == DayOfWeek.SUNDAY) {
 			current = targetDate;
-		}else {
-		// 上で取得したtargetDateに曜日の値をマイナスして前月分のLocalDateを求める
-		current = targetDate.minusDays(firstDayOfWeek.getValue());}
+		} else {
+			// 上で取得したtargetDateに曜日の値をマイナスして前月分のLocalDateを求める
+			current = targetDate.minusDays(firstDayOfWeek.getValue());
+		}
 
 		// ここでtask用に1週目の前月分の開始日を設定
 		LocalDate first = targetDate.minusDays(firstDayOfWeek.getValue());
@@ -103,23 +105,7 @@ public class MainController {
 
 		// taskリストを生成
 		List<Diary> DiaryList = new ArrayList<Diary>();
-
-		// adminかどうかの処理
-		boolean isAdmin = false;
-		for (GrantedAuthority authority : user.getAuthorities()) {
-			if ("ROLE_ADMIN".equals(authority.getAuthority())) {
-				isAdmin = true;
-				break;
-			}
-		}
-
-		if (isAdmin) {
-			// adminなら全タスク取得
-			DiaryList = diary.findByDateBetween2(first, last);
-		} else {
-			// userなら自身のタスクのみ取得
-			DiaryList = diary.findByDateBetween(first, last, user.getName());
-		}
+		DiaryList = diary.findByDateBetween(first, last, user.getName());
 
 		// 日付とタスクを紐付ける
 		MultiValueMap<LocalDate, Diary> DiaryMap = new LinkedMultiValueMap<LocalDate, Diary>();
