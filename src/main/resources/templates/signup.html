@@ -11,6 +11,12 @@
 		<div class="form sd">
 			<p class="title sd test">Sign up</p>
 			<div class="form_box sd">
+				<div th:if="${userNameError}" class="error">
+					<p th:text="${userNameError}"></p>
+				</div>
+				<div th:if="${error}" class="error">
+					<p th:text="${error}"></p>
+				</div>
 				<div th:if="${passwordError}">
 					<div>パスワードが異なります。</div>
 				</div>

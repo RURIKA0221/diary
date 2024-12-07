@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+body {
+	margin-top: 10px; /* ページ全体を下にずらす */
+}
+
 .sd {
 	max-width: 100%;
 	z-index: 0;
@@ -127,6 +131,7 @@ button {
 	font-weight: 900;
 	letter-spacing: 0.15em;
 	margin: 0px 0px 20px 0px;
+	margin-top: 80px; /* タイトルを微調整 */
 }
 
 .form_button {
@@ -139,6 +144,7 @@ button {
 	box-sizing: border-box;
 	width: 450px !important;
 	text-align: center;
+	margin-top: 40px; /* ボタンの上側に余白を追加 */
 }
 
 .button_group {
@@ -172,6 +178,7 @@ button {
 	background: #fae3d9;
 	height: 100vh;
 	justify-content: center;
+	padding: 50px 20px;
 }
 
 .todo_header {
@@ -192,10 +199,11 @@ a.prevnext:-webkit-any-link {
 
 .calendar_box {
 	background: #FFFFFF;
-	border: 1px solid #ffb6b9;
+	border: 1px solid #ffb6b9; text-align : center; /* テキストの中央揃え */
 	height: 120px;
 	margin: 0px 0px 0px 0px;
 	width: 120px;
+	text-align: center;
 }
 
 .calendar_title_text {
@@ -206,4 +214,23 @@ a.prevnext:-webkit-any-link {
 	height: 100%;
 	line-height: 1.4;
 	padding: 5px;
+}
+
+.birthday {
+	color: #ff1493;
+	font-weight: bold;
+}
+
+.sunday {
+    background-color: #fcf7c2;
+}
+
+.saturday {
+    background-color: #fcf7c2;
+}
+
+/* カレンダーの曜日セルにも適用 */
+.calendar_box:nth-child(1), /* SUNセル */
+.calendar_box:nth-child(7)  /* SATセル */ {
+    background-color: #fcf7c2;
 }

@@ -16,14 +16,13 @@
 		<div class="border"></div>
 		<a th:href="@{/main}" class="text">カレンダー</a>
 		<div class="border"></div>
-		<a
-			th:href="@{/main/create/{date}(date=${#calendars.format(#calendars.createNow(), 'yyyy-MM-dd')})}"
+		<a th:href="@{/main/create/{date}(date=${#calendars.format(#calendars.createNow(), 'yyyy-MM-dd')})}"
 			class="text">登録</a>
 	</header>
 
 	<div class="todo sd">
 		<div class="sd">
-			<p class="title text sd">Diary</p>
+			<p class="title text sd" th:text="${userName} + '’s Diary'">Diary</p>
 			<div class="todo_header">
 
 				<form th:action="@{/main}" name="form1">
@@ -64,13 +63,17 @@
 					</div>
 				</div>
 				<div class="calendar_row sd" th:each="week : ${matrix}">
-					<div class="calendar_box  sd" th:each="day : ${week}">
+					<div class="calendar_box  sd" th:each="day : ${week}"
+						th:classappend="${day.dayOfWeek == T(java.time.DayOfWeek).SUNDAY} ? 'sunday' : '' + 
+        		 		(${day.dayOfWeek == T(java.time.DayOfWeek).SATURDAY} ? ' saturday' : '')">
 						<div>
 							<a th:href="@{/main/create/{date}(date=${day})}">[[${day.dayOfMonth}]]</a>
 						</div>
+						<div th:if="${birthdays.contains(day)}" class="birthday">
+							Happy Birthday🎂</div>
 						<div th:each="t : ${tasks.get(day)}">
-							<a th:if="${t}" th:href="@{/main/edit/{id}(id=${t.id})}">
-								<span th:text="${t.title}"></span></a>
+							<a th:if="${t}" th:href="@{/main/edit/{id}(id=${t.id})}"> <span
+								th:text="${t.title}"></span></a>
 						</div>
 					</div>
 				</div>

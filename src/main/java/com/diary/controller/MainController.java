@@ -24,11 +24,16 @@ public class MainController {
 
 	@Autowired
 	private DiaryRepository diary;
+	
 
 	@GetMapping("/main")
 	public String main(Model model, @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
 			@AuthenticationPrincipal AccountUserDetails user) {
 
+		// ユーザー名を取得してモデルに追加
+        String displayName = user.getName();  // ユーザーの表示名を取得
+        model.addAttribute("userName", displayName);
+		
 		LocalDate targetDate;
 		// 指定された日付がない場合は、現在の日付を基準とする
 		if (date == null) {
@@ -117,6 +122,18 @@ public class MainController {
 		// コレクションのデータをHTMLに連携
 		model.addAttribute("tasks", DiaryMap);
 
+        LocalDate birthday = user.getBirthday();  // 誕生日を取得
+		
+		List<LocalDate> birthdays = new ArrayList<>();
+        for (List<LocalDate> weekList : calendar) {
+            for (LocalDate day : weekList) {
+                if (day.getMonth() == birthday.getMonth() && day.getDayOfMonth() == birthday.getDayOfMonth()) {
+                    birthdays.add(day);  // 誕生日の日付を追加
+                }
+            }
+        }
+        model.addAttribute("birthdays", birthdays);  // 誕生日の日付をモデルに追加
+		
 		return "main";
 	}
 }

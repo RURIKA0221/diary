@@ -1,5 +1,7 @@
 package com.diary.service;
 
+import java.time.LocalDate;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -64,4 +66,7 @@ public class AccountUserDetails implements UserDetails{
 		return null;
 	}
 
+	public LocalDate getBirthday() {
+		return user.getBirthday();
+	}
 }

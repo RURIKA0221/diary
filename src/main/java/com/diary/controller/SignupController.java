@@ -21,7 +21,6 @@ public class SignupController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	
 	@GetMapping("/signup")
 	String signupForm() {
 		return "signup";
@@ -30,11 +29,22 @@ public class SignupController {
 	@PostMapping("/signup")
 	public String Signup(@Validated UserForm userForm, Model model) {
 
+		if (userForm.getUserName().isEmpty() || userForm.getName().isEmpty() || userForm.getPassword().isEmpty()
+				|| userForm.getPassword2().isEmpty() || userForm.getBirthday() == null) {
+			model.addAttribute("error", "全ての情報を記入してください");
+			return "signup"; // サインアップ画面に戻す
+		}
+
 		if (!userForm.getPassword().equals(userForm.getPassword2())) {
 			model.addAttribute("passwordError", true);
 			return "signup";
 		}
 
+		if (repo.existsByUserName(userForm.getUserName())) {
+            model.addAttribute("userNameError", "そのユーザーIDは使用されています。別のユーザーIDで登録してください。");
+            return "signup";
+        }
+		
 		String hashedPassword = passwordEncoder.encode(userForm.getPassword());
 
 		Users user = new Users();
